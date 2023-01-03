@@ -1,0 +1,20 @@
+<mat-toolbar>
+    <button mat-raised-button>Novo</button>
+    <span style="flex:auto"></span>
+    <button mat-raised-button
+            [disabled]="!pessoaAtual"
+            color="primary">Confirmar</button>
+</mat-toolbar>
+<div class="container">
+    <mat-selection-list [multiple]="false"
+                        (selectionChange)="select($event)">
+        <mat-list-option *ngFor="let pessoa of pessoas"
+                         [value]="pessoa">
+            {{pessoa?.nome}}
+        </mat-list-option>
+    </mat-selection-list>
+    <app-cadastro-professor *ngIf="professorAtual "
+                            [professor]="professorAtual"></app-cadastro-professor>
+    <app-cadastro-aluno *ngIf="alunoAtual "
+                        [aluno]="alunoAtual"></app-cadastro-aluno>
+</div>

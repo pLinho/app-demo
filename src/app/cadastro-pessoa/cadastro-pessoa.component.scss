@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+mat-toolbar {
+  min-height: 64px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  > * {
+    flex: auto;
+  }
+}
