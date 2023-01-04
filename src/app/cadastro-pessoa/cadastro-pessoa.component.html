@@ -1,5 +1,6 @@
 <mat-toolbar>
-    <button mat-raised-button>Novo</button>
+    <button mat-raised-button
+            (click)="novoCadastro()">Novo</button>
     <span style="flex:auto"></span>
     <button mat-raised-button
             [disabled]="!pessoaAtual"

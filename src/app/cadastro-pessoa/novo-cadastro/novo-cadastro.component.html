@@ -1,0 +1,55 @@
+<form [formGroup]="form">
+    <mat-form-field>
+        <mat-select formControlName="tipo">
+            <mat-option value="aluno">Novo Aluno</mat-option>
+            <mat-option value="professor">Novo Professor</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <ng-container *ngIf="!!form.get('tipo')?.value">
+        <mat-form-field>
+            <mat-label>CPF</mat-label>
+            <input type="text"
+                   matInput
+                   formControlName="cpf">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Nome</mat-label>
+            <input type="text"
+                   matInput
+                   formControlName="nome">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Data nascimento</mat-label>
+            <input type="text"
+                   matInput
+                   formControlName="dataNascimento">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Endereco</mat-label>
+            <input type="text"
+                   matInput
+                   formControlName="endereco">
+        </mat-form-field>
+        <mat-form-field *ngIf="form.get('tipo')?.value === 'aluno'">
+            <mat-label>Número Matrícula</mat-label>
+            <input type="text"
+                   matInput
+                   formControlName="numeroMatricula">
+        </mat-form-field>
+        <ng-container *ngIf="form.get('tipo')?.value === 'professor'">
+
+            <mat-form-field>
+                <mat-label>Especialidades</mat-label>
+                <input type="text"
+                       matInput
+                       formControlName="especialidade">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Conhecimentos</mat-label>
+                <input type="text"
+                       matInput
+                       formControlName="conhecimentos">
+            </mat-form-field>
+        </ng-container>
+    </ng-container>
+</form>

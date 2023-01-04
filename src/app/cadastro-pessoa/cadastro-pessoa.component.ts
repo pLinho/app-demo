@@ -4,6 +4,8 @@ import { IAluno } from '../api/modelo/i-aluno';
 import { IPessoa } from '../api/modelo/i-pessoa';
 import { IProfessor } from '../api/modelo/i-professor';
 import { ApiPessoaService } from '../api/services/pessoa.service';
+import { MatDialog } from '@angular/material/dialog';
+import { NovoCadastroComponent } from './novo-cadastro/novo-cadastro.component';
 
 @Component({
   selector: 'app-cadastro-pessoa',
@@ -17,7 +19,8 @@ export class CadastroPessoaComponent implements OnInit {
   alunoAtual?: IAluno;
   tipo?: 'aluno' | 'professor';
   constructor(
-    private readonly api: ApiPessoaService) { }
+    private readonly api: ApiPessoaService,
+    private readonly dialog: MatDialog) { }
   ngOnInit(): void {
     this.carregarLista();
   }
@@ -29,5 +32,10 @@ export class CadastroPessoaComponent implements OnInit {
     this.tipo = !!this.pessoaAtual ? (this.pessoaAtual as any).numeroMatricula === undefined ? 'aluno' : 'professor' : undefined;
     this.alunoAtual = this.tipo === 'aluno' ? this.pessoaAtual as IAluno : undefined;
     this.professorAtual = this.tipo === 'professor' ? this.pessoaAtual as IProfessor : undefined;
+  }
+  novoCadastro() {
+    this.dialog.open(NovoCadastroComponent, {
+      
+    });
   }
 }
