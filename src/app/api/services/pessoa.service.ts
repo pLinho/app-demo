@@ -7,8 +7,8 @@ import { IProfessor } from "../modelo/i-professor";
 
 @Injectable()
 export class ApiPessoaService {
-    // private API = "http://10.250.250.108:8084/estagiario/api/pessoa/"
-    private API = "http://localhost:8080/api/api/pessoa/"
+    private API = "http://10.250.250.108:8084/estagiario/api/pessoa/"
+    // private API = "http://localhost:8080/api/api/pessoa/"
     constructor(private readonly http: HttpClient) { }
     obterLista() {
         return this.http.get<IPessoa[]>(this.API + 'obterLista')

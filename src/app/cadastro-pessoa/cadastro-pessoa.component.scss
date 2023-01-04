@@ -7,10 +7,20 @@ mat-toolbar {
 }
 
 .container {
+  height: calc(100vh - 64px);
+  overflow: auto;
+
   display: flex;
   flex-direction: row;
   gap: 12px;
   > * {
     flex: auto;
   }
+}
+.col {
+  height: calc(100vh - 64px);
+  overflow: auto;
+
+  display: flex;
+  flex-direction: column;
 }

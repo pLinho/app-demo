@@ -22,10 +22,14 @@
             </mat-form-field>
         </div>
         <mat-form-field>
-            <mat-label>Data nascimento</mat-label>
-            <input type="text"
-                   matInput
-                   formControlName="dataNascimento">
+            <mat-label>Data Nascimento</mat-label>
+            <input matInput
+                   formControlName="dataNascimento"
+                   [matDatepicker]="dataNascimentoPicker">
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix
+                                   [for]="dataNascimentoPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dataNascimentoPicker></mat-datepicker>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Endereco</mat-label>
@@ -50,8 +54,19 @@
                 <mat-label>Conhecimentos</mat-label>
                 <input type="text"
                        matInput
-                       formControlName="conhecimentos">
+                       #conhecimentoInput>
+                <button matSuffix
+                        mat-icon-button
+                        (click)="adicionarConhecimento(conhecimentoInput.value);conhecimentoInput.value = ''">
+                    <mat-icon>add</mat-icon>
+                </button>
             </mat-form-field>
+            <div class="conhecimentos">
+                <div class="conhecimento"
+                     *ngFor="let conhecimento of conhecimentos">
+                    {{conhecimento}}
+                </div>
+            </div>
         </ng-container>
     </ng-container>
 </form>

@@ -4,6 +4,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { IAluno } from 'src/app/api/modelo/i-aluno';
 import { IPessoa } from 'src/app/api/modelo/i-pessoa';
 import { IProfessor } from 'src/app/api/modelo/i-professor';
+import { ApiAlunoService } from 'src/app/api/services/aluno.service';
+import { ApiProfessorService } from 'src/app/api/services/professor.service';
 
 @Component({
   selector: 'app-novo-cadastro',
@@ -21,9 +23,12 @@ export class NovoCadastroComponent {
     conhecimentos: [,],
     numeroMatricula: [,],
   });
+  conhecimentos: string[] = [];
   constructor(
     private readonly fb: FormBuilder,
-    private readonly ref: MatDialogRef<NovoCadastroComponent>
+    private readonly ref: MatDialogRef<NovoCadastroComponent>,
+    private readonly api_aluno: ApiAlunoService,
+    private readonly api_professor: ApiProfessorService,
   ) { }
   cancelar() {
     this.ref.close(false);
@@ -35,11 +40,23 @@ export class NovoCadastroComponent {
       (pessoa as IAluno).numeroMatricula = value.numeroMatricula || '';
     } else if (value.tipo === 'professor') {
       (pessoa as IProfessor).especialidade = value.especialidade || '';
-      (pessoa as IProfessor).conhecimentos = value.conhecimentos || [];
+      (pessoa as IProfessor).conhecimentos = this.conhecimentos;
     }
     pessoa.cpf = value.cpf;
     pessoa.dataNascimento = value.dataNascimento;
     pessoa.nome = value.nome;
-    this.ref.close(pessoa);
+
+    if (value.tipo === 'aluno') {
+      this.api_aluno.manter(pessoa as IAluno).subscribe(
+        () => this.ref.close(pessoa)
+      );
+    } else if (value.tipo === 'professor') {
+      this.api_professor.manter(pessoa as IProfessor).subscribe(
+        () => this.ref.close(pessoa)
+      );
+    }
+  }
+  adicionarConhecimento(conhecimento: string) {
+    this.conhecimentos.push(conhecimento);
   }
 }

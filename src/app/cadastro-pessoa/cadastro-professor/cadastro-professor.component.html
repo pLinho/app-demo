@@ -1,1 +1,54 @@
-<p>cadastro-professor works!</p>
+<form *ngIf="form"
+      [formGroup]="form">
+    <mat-form-field>
+        <mat-label>CPF</mat-label>
+        <input matInput
+               type="text"
+               formControlName="cpf">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput
+               type="text"
+               formControlName="nome">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Data Nascimento</mat-label>
+        <input matInput
+               formControlName="dataNascimento"
+               [matDatepicker]="dataNascimentoPicker">
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix
+                               [for]="dataNascimentoPicker"></mat-datepicker-toggle>
+        <mat-datepicker #dataNascimentoPicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Endereço</mat-label>
+        <input matInput
+               type="text"
+               formControlName="endereco">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Especialidades</mat-label>
+        <input type="text"
+               matInput
+               formControlName="especialidade">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Conhecimentos</mat-label>
+        <input type="text"
+               matInput
+               #conhecimentoInput>
+        <button matSuffix
+                mat-icon-button
+                (click)="adicionarConhecimento(conhecimentoInput.value);conhecimentoInput.value = ''">
+            <mat-icon>add</mat-icon>
+        </button>
+    </mat-form-field>
+    <div class="conhecimentos">
+        <div class="conhecimento"
+             *ngFor="let conhecimento of conhecimentos">
+            {{conhecimento}}
+        </div>
+    </div>
+</form>
