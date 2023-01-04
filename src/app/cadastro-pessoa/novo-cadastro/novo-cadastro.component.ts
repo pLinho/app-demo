@@ -32,10 +32,10 @@ export class NovoCadastroComponent {
     const value = this.form.getRawValue();
     const pessoa: IPessoa | IAluno | IProfessor = {};
     if (value.tipo === 'aluno') {
-      (pessoa as IAluno).numeroMatricula = value.numeroMatricula;
+      (pessoa as IAluno).numeroMatricula = value.numeroMatricula || '';
     } else if (value.tipo === 'professor') {
-      (pessoa as IProfessor).especialidade = value.especialidade;
-      (pessoa as IProfessor).conhecimentos = value.conhecimentos;
+      (pessoa as IProfessor).especialidade = value.especialidade || '';
+      (pessoa as IProfessor).conhecimentos = value.conhecimentos || [];
     }
     pessoa.cpf = value.cpf;
     pessoa.dataNascimento = value.dataNascimento;
