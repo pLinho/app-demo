@@ -29,13 +29,22 @@ export class CadastroPessoaComponent implements OnInit {
   }
   select(event: MatSelectionListChange) {
     this.pessoaAtual = event.source._value ? event.source._value[0] as IPessoa : undefined;
-    this.tipo = !!this.pessoaAtual ? (this.pessoaAtual as any).numeroMatricula === undefined ? 'aluno' : 'professor' : undefined;
+    this.tipo = !!this.pessoaAtual ? (this.pessoaAtual as any).numeroMatricula !== undefined ? 'aluno' : 'professor' : undefined;
     this.alunoAtual = this.tipo === 'aluno' ? this.pessoaAtual as IAluno : undefined;
     this.professorAtual = this.tipo === 'professor' ? this.pessoaAtual as IProfessor : undefined;
   }
   novoCadastro() {
-    this.dialog.open(NovoCadastroComponent, {
-      
+    const dialog = this.dialog.open(NovoCadastroComponent, {
+
     });
+    dialog.afterClosed().subscribe(r => {
+      if (typeof r === 'object') {
+        if (!this.pessoas) this.pessoas = [];
+        this.pessoas?.push(r);
+      }
+    })
+  }
+  confirmar() {
+
   }
 }

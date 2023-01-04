@@ -7,3 +7,9 @@
 form {
     display: contents;
 }
+
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
